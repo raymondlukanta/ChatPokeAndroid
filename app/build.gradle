@@ -24,8 +24,19 @@ android {
     }
 }
 
+def AndroidSupportVersion = '23.4.0'
+def RetrofitVersion = '2.0.2'
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.4.0'
+
+    compile "com.android.support:appcompat-v7:$AndroidSupportVersion"
+    compile "com.android.support:design:$AndroidSupportVersion"
+    compile "com.android.support:recyclerview-v7:$AndroidSupportVersion"
+    compile "com.android.support:percent:$AndroidSupportVersion"
+
+    compile "com.squareup.retrofit2:retrofit:$RetrofitVersion"
+    compile "com.squareup.retrofit2:converter-gson:$RetrofitVersion"
+    compile "com.squareup.picasso:picasso:2.5.2"
 }
