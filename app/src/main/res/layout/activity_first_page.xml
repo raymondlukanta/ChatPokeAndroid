@@ -33,7 +33,7 @@
                 android:textStyle="bold"
                 android:textColor="@color/colorWhite"
                 android:text="Pokeball"
-                android:textSize="@dimen/text_size_large"/>
+                android:textSize="@dimen/text_size_toolbar_title"/>
             </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
