@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.kogitune.activity_transition.ActivityTransition;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -26,9 +27,12 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         setSupportActionBar(mToolbar);
+
+        ActivityTransition.with(getIntent()).to(mToolbar).start(savedInstanceState);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

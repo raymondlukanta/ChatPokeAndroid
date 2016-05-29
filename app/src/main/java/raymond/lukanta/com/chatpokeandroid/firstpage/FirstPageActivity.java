@@ -1,5 +1,6 @@
 package raymond.lukanta.com.chatpokeandroid.firstpage;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kogitune.activity_transition.ActivityTransitionLauncher;
 import com.squareup.picasso.Picasso;
 
 import raymond.lukanta.com.chatpokeandroid.R;
@@ -29,7 +31,7 @@ public class FirstPageActivity extends AppCompatActivity {
     private View.OnClickListener mOnToolbarClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            goToProductScreen();
+            goToProductScreen(v);
         }
     };
 
@@ -57,8 +59,9 @@ public class FirstPageActivity extends AppCompatActivity {
         toolbarTitleTextView.setOnClickListener(mOnToolbarClickListener);
     }
 
-    private void goToProductScreen() {
-        startActivity(new Intent(this, ProductActivity.class));
+    private void goToProductScreen(View v) {
+        Intent intent = new Intent(this, ProductActivity.class);
+        ActivityTransitionLauncher.with(this).from(v).launch(intent);
     }
 
     @Override
@@ -67,7 +70,7 @@ public class FirstPageActivity extends AppCompatActivity {
 
         switch (id) {
             case android.R.id.home:
-                goToProductScreen();
+                goToProductScreen(new View(this));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

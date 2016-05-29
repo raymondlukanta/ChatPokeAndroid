@@ -39,4 +39,7 @@ dependencies {
     compile "com.squareup.retrofit2:retrofit:$RetrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$RetrofitVersion"
     compile "com.squareup.picasso:picasso:2.5.2"
+
+
+    compile 'com.kogitune:pre-lollipop-activity-transition:1.3.0'
 }
