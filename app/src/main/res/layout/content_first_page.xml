@@ -1,4 +1,5 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<fragment
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment"
@@ -6,37 +7,4 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:layout="@layout/fragment_first_page">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_first_page_chat_history"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/edit_text_first_page_chat_editor"
-        android:padding="@dimen/activity_horizontal_margin" />
-
-    <EditText
-        android:id="@+id/edit_text_first_page_chat_editor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_toLeftOf="@+id/floating_action_button_first_page_send_button"
-        android:layout_toStartOf="@+id/floating_action_button_first_page_send_button"
-        android:background="@drawable/message_bg_input"
-        android:hint="@string/send_a_message"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:padding="@dimen/activity_horizontal_margin"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floating_action_button_first_page_send_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_send"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"/>
-</RelativeLayout>
+    tools:layout="@layout/fragment_first_page"/>
