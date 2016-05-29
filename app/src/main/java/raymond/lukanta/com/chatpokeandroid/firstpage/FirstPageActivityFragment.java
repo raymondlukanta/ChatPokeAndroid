@@ -28,7 +28,6 @@ public class FirstPageActivityFragment extends BaseFragment {
     private ChatPokeAndroidApplication mApp;
     private ChatAdapter mChatAdapter;
     private RecyclerView mChatHistoryRecyclerView;
-    private SimpleDateFormat mChatTimestampSimpleDateFormat;
 
     public FirstPageActivityFragment() {
     }
@@ -37,8 +36,6 @@ public class FirstPageActivityFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApp = (ChatPokeAndroidApplication) getActivity().getApplication();
-
-        mChatTimestampSimpleDateFormat = new SimpleDateFormat("MMM d, h:mm", Locale.getDefault());
     }
 
     @Override
