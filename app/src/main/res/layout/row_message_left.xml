@@ -15,7 +15,7 @@
         android:contentDescription="@string/message_left_avatar"
         android:src="@drawable/pokeball"/>
 
-    <include layout="@layout/row_message_content"
+    <include layout="@layout/include_message_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/image_view_message_avatar"

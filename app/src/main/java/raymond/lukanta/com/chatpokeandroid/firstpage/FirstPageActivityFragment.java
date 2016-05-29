@@ -24,7 +24,6 @@ import retrofit2.Response;
  */
 public class FirstPageActivityFragment extends BaseFragment {
     private ChatPokeAndroidApplication mApp;
-    private Messaging mMessaging;
     private ChatAdapter mChatAdapter;
     private RecyclerView mChatHistoryRecyclerView;
 
@@ -79,12 +78,12 @@ public class FirstPageActivityFragment extends BaseFragment {
             public void onResponse(Call<Messaging> call, Response<Messaging> response) {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
-                    mMessaging = response.body();
+                    Messaging messaging = response.body();
 
-                    mChatAdapter = new ChatAdapter(getActivity(), mMessaging.getOffer());
+                    mChatAdapter = new ChatAdapter(getActivity(), messaging.getOffer());
                     mChatHistoryRecyclerView.setAdapter(mChatAdapter);
 
-                    mChatAdapter.setData(mMessaging.getChats());
+                    mChatAdapter.setData(messaging.getChats());
                     scrollChatHistoryRecyclerViewToBottom();
 
                 } else {

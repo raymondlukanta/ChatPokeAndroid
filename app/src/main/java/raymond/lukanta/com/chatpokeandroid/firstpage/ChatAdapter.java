@@ -42,8 +42,6 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
 
         mBuyerName = offer.getBuyerName();
         mBuyerImageUrl = offer.getBuyerImageUrl();
-
-
     }
 
     @Override
