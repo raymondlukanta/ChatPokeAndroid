@@ -34,7 +34,6 @@
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/activity_horizontal_margin"
                 android:background="?android:attr/selectableItemBackground"
-                android:textStyle="bold"
                 android:textColor="@color/colorWhite"
                 android:text="Pokeball"
                 android:textSize="@dimen/text_size_first_page_toolbar_title"/>

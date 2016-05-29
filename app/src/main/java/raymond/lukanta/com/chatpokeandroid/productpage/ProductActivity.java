@@ -1,5 +1,7 @@
 package raymond.lukanta.com.chatpokeandroid.productpage;
 
+import android.animation.Animator;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -7,12 +9,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyCharacterMap;
+import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewConfiguration;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.kogitune.activity_transition.ActivityTransition;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
@@ -27,12 +33,9 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
-
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         setSupportActionBar(mToolbar);
-
-        ActivityTransition.with(getIntent()).to(mToolbar).start(savedInstanceState);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -44,11 +47,37 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         }
 
         mProductName = (TextView) findViewById(R.id.text_view_product_page_toolbar_product_name);
+
+        boolean hasMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
+        boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+
+        if (!hasMenuKey && !hasBackKey) {
+            View fragment = findViewById(R.id.fragment);
+
+            int screenOrientation = getResources().getConfiguration().orientation;
+            switch (screenOrientation) {
+                case Configuration.ORIENTATION_PORTRAIT:
+                    fragment.setPadding(16, 16, 16, getNavigationBarHeight());
+                    break;
+                case Configuration.ORIENTATION_LANDSCAPE:
+                    fragment.setPadding(16, 16, getNavigationBarHeight(), 16);
+                    break;
+            }
+        }
     }
 
     public int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+    public int getNavigationBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
             result = getResources().getDimensionPixelSize(resourceId);
         }
@@ -73,6 +102,17 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
             Drawable d = new BitmapDrawable(getResources(), bitmap);
             mToolbar.setBackgroundDrawable(d);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                int cx = mToolbar.getWidth() / 2;
+                int cy = mToolbar.getHeight() / 2;
+
+                float finalRadius = (float) Math.hypot(cx, cy);
+
+                Animator anim =
+                        ViewAnimationUtils.createCircularReveal(mToolbar, cx, cy, 0, finalRadius);
+                anim.start();
+            }
         }
 
         @Override
