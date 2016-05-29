@@ -4,6 +4,7 @@
     <string name="action_settings">Settings</string>
     <string name="first_page_toolbar_image">first page toolbar image</string>
     <string name="message_left_avatar">message left avatar</string>
+    <string name="message_right_avatar">message right avatar</string>
     <string name="dialog_got_it">Got it</string>
     <string name="dialog_loading">Loading…</string>
     <string name="alert_dialog_oops">Oops</string>

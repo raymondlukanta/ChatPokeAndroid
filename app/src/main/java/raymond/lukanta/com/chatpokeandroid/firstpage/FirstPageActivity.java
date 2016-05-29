@@ -26,6 +26,7 @@ public class FirstPageActivity extends BaseActivity {
     private ChatPokeAndroidApplication mApp;
     private Messaging mMessaging;
     private ChatAdapter mChatAdapter;
+    private RecyclerView mChatHistoryRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +52,10 @@ public class FirstPageActivity extends BaseActivity {
                 .transform(new RoundedTransformation(imageSizeInPx / 2, 0))
                 .into(toolbarImageView);
 
-        RecyclerView chatHistoryRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_first_page_chat_history);
-        chatHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        chatHistoryRecyclerView.setHasFixedSize(true);
+        mChatHistoryRecyclerView = (RecyclerView) findViewById(R.id.recycler_view_first_page_chat_history);
+        mChatHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mChatHistoryRecyclerView.setHasFixedSize(true);
 
-        mChatAdapter = new ChatAdapter(this);
-        chatHistoryRecyclerView.setAdapter(mChatAdapter);
         callChatApi();
     }
 
@@ -70,6 +69,10 @@ public class FirstPageActivity extends BaseActivity {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
                     mMessaging = response.body();
+
+                    mChatAdapter = new ChatAdapter(FirstPageActivity.this, mMessaging.getOffer());
+                    mChatHistoryRecyclerView.setAdapter(mChatAdapter);
+
                     mChatAdapter.setData(mMessaging.getChats());
                     mChatAdapter.notifyDataSetChanged();
                     //TODO
