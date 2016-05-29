@@ -2,16 +2,20 @@ package raymond.lukanta.com.chatpokeandroid.firstpage;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
 import raymond.lukanta.com.chatpokeandroid.R;
 import raymond.lukanta.com.chatpokeandroid.app.ChatPokeAndroidApplication;
+import raymond.lukanta.com.chatpokeandroid.model.Chat;
 import raymond.lukanta.com.chatpokeandroid.model.Messaging;
 import raymond.lukanta.com.chatpokeandroid.productpage.ProductActivity;
 import raymond.lukanta.com.chatpokeandroid.ui.RoundedTransformation;
@@ -43,10 +47,23 @@ public class FirstPageActivity extends BaseActivity {
 
         ImageView toolbarImageView = (ImageView) findViewById(R.id.image_view_first_page_toolbar_image);
 
-        int imageSizeInPx = (int) ViewHelper.convertDpToPixel(35);
-        Picasso picasso = Picasso.with(this);
-        picasso.setIndicatorsEnabled(true);
-        picasso.load(R.drawable.pokeball)
+        final EditText chatEditorEditText = (EditText) findViewById(R.id.edit_text_first_page_chat_editor);
+
+        FloatingActionButton sendChatFloatingActionButton = (FloatingActionButton) findViewById(R.id.floating_action_button_first_page_send_button);
+        sendChatFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Chat chat = new Chat();
+                chat.setMessage(chatEditorEditText.getText().toString().trim());
+                chat.setType("b");
+                chat.setTimestamp("DDDD");
+                mChatAdapter.addEntity(chat);
+                chatEditorEditText.setText("");
+                scrollChatHistoryRecyclerViewToBottom();
+            }
+        });
+        int imageSizeInPx = (int) getResources().getDimension(R.dimen.toolbar_picture_size);
+        Picasso.with(this).load(R.drawable.pokeball)
                 .resize(imageSizeInPx, imageSizeInPx)
                 .centerInside()
                 .transform(new RoundedTransformation(imageSizeInPx / 2, 0))
@@ -57,6 +74,10 @@ public class FirstPageActivity extends BaseActivity {
         mChatHistoryRecyclerView.setHasFixedSize(true);
 
         callChatApi();
+    }
+
+    private void scrollChatHistoryRecyclerViewToBottom() {
+        mChatHistoryRecyclerView.scrollToPosition(mChatAdapter.getItemCount()-1);
     }
 
     private void callChatApi() {
@@ -74,8 +95,7 @@ public class FirstPageActivity extends BaseActivity {
                     mChatHistoryRecyclerView.setAdapter(mChatAdapter);
 
                     mChatAdapter.setData(mMessaging.getChats());
-                    mChatAdapter.notifyDataSetChanged();
-                    //TODO
+                    scrollChatHistoryRecyclerViewToBottom();
 
                 } else {
                     showAlertDialog(getString(R.string.alert_dialog_oops), getString(R.string.error_common));

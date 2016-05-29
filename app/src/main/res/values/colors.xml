@@ -8,5 +8,6 @@
     <color name="colorRightName">#CF815D</color>
     <color name="colorTimestamp">#847E85</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
 
 </resources>

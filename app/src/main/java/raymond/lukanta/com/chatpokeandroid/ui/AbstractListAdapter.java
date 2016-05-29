@@ -24,6 +24,11 @@ public abstract class AbstractListAdapter<V, K extends RecyclerView.ViewHolder> 
         return mData.size();
     }
 
+    public void addEntity(V entity) {
+        mData.add(mData.size(), entity);
+        notifyDataSetChanged();
+    }
+
     public void addEntity(int i, V entity) {
         mData.add(i, entity);
         notifyItemInserted(i);

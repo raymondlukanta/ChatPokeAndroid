@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
 
     <include layout="@layout/row_message_content"
         android:layout_width="wrap_content"
@@ -9,8 +11,7 @@
         android:layout_marginLeft="@dimen/chat_picture_size"
         android:layout_marginStart="@dimen/chat_picture_size"
         android:layout_toLeftOf="@+id/image_view_message_avatar"
-        android:layout_toStartOf="@+id/image_view_message_avatar"
-        />
+        android:layout_toStartOf="@+id/image_view_message_avatar"/>
 
     <ImageView
         android:id="@+id/image_view_message_avatar"
@@ -18,6 +19,7 @@
         android:layout_height="@dimen/chat_picture_size"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
         android:contentDescription="@string/message_right_avatar"
         android:src="@drawable/pokeball"/>
 

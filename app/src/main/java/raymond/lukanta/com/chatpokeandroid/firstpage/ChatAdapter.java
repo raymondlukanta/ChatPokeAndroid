@@ -1,34 +1,49 @@
 package raymond.lukanta.com.chatpokeandroid.firstpage;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import raymond.lukanta.com.chatpokeandroid.R;
 import raymond.lukanta.com.chatpokeandroid.model.Chat;
 import raymond.lukanta.com.chatpokeandroid.model.Offer;
 import raymond.lukanta.com.chatpokeandroid.ui.AbstractListAdapter;
+import raymond.lukanta.com.chatpokeandroid.ui.RoundedTransformation;
+import raymond.lukanta.com.chatpokeandroid.ui.ViewHelper;
 
 /**
  * Created by raymondlukanta on 28/05/16.
  */
 public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolder> {
     private final static int BUYER_VIEW = 1;
-    private final static int SENDER_VIEW = 2;
+    private final static int SELLER_VIEW = 2;
 
     private final Context mContext;
     private final LayoutInflater mInflater;
-    private final Offer mOffer;
+    private final String mSellerName;
+    private final String mBuyerName;
+    private final String mSellerImageUrl;
+    private final String mBuyerImageUrl;
 
     public ChatAdapter(Context context, Offer offer) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
-        mOffer = offer;
+
+        mSellerName = offer.getSellerName();
+        mSellerImageUrl = offer.getSellerImageUrl();
+
+        mBuyerName = offer.getBuyerName();
+        mBuyerImageUrl = offer.getBuyerImageUrl();
+
+
     }
 
     @Override
@@ -36,8 +51,10 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
         Chat chat = mData.get(position);
 
         switch (chat.getType()) {
-            case Chat.BUYER_CHAT_TYPE: return BUYER_VIEW;
-            default: return SENDER_VIEW;
+            case Chat.BUYER_CHAT_TYPE:
+                return BUYER_VIEW;
+            default:
+                return SELLER_VIEW;
         }
     }
 
@@ -46,9 +63,11 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
         int layoutResourceId = 0;
 
         switch (viewType) {
-            case BUYER_VIEW : layoutResourceId = R.layout.row_message_right;
+            case BUYER_VIEW:
+                layoutResourceId = R.layout.row_message_right;
                 break;
-            case SENDER_VIEW : layoutResourceId = R.layout.row_message_left;
+            case SELLER_VIEW:
+                layoutResourceId = R.layout.row_message_left;
                 break;
         }
         return new ViewHolder(
@@ -57,11 +76,12 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder routeViewHolder, int i) {
-        bind(routeViewHolder, i);
+    public void onBindViewHolder(ViewHolder routeViewHolder, int position) {
+        bind(routeViewHolder, position);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private final LinearLayout messageContentHolderLinearLayout;
         private final ImageView avatarImageView;
         private final TextView nameTextView;
         private final TextView messageTextView;
@@ -69,7 +89,8 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
 
         public ViewHolder(View v) {
             super(v);
-            avatarImageView = (ImageView) v.findViewById(R.id.image_view_message_left_avatar);
+            messageContentHolderLinearLayout = (LinearLayout) v.findViewById(R.id.linear_layout_message_content_holder);
+            avatarImageView = (ImageView) v.findViewById(R.id.image_view_message_avatar);
             nameTextView = (TextView) v.findViewById(R.id.text_view_message_content_name);
             messageTextView = (TextView) v.findViewById(R.id.text_view_message_content_message);
             timestampTextView = (TextView) v.findViewById(R.id.text_view_message_content_timestamp);
@@ -77,15 +98,44 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
         }
     }
 
-    public void bind(ViewHolder messagingViewHolder, int i) {
-        Chat chat = mData.get(i);
+    public void bind(ViewHolder messagingViewHolder, int position) {
+        Chat chat = mData.get(position);
 
+        int chatBackgroundResourceId = 0;
+        int senderNameTextColorResourceId = 0;
+        String senderName = "";
+        String senderImageUrl = "";
 
-        switch (chat.getType()) {
-
+        switch (messagingViewHolder.getItemViewType()) {
+            case BUYER_VIEW:
+                chatBackgroundResourceId = R.drawable.message_bg_right;
+                senderNameTextColorResourceId = R.color.colorRightName;
+                senderName = mBuyerName;
+                senderImageUrl = mBuyerImageUrl;
+                break;
+            case SELLER_VIEW:
+                chatBackgroundResourceId = R.drawable.message_bg_left;
+                senderNameTextColorResourceId = R.color.colorLeftName;
+                senderName = mSellerName;
+                senderImageUrl = mSellerImageUrl;
+                break;
         }
-//        messagingViewHolder.nameTextView.setText();
+
+        messagingViewHolder.messageContentHolderLinearLayout.setBackgroundResource(chatBackgroundResourceId);
+        messagingViewHolder.nameTextView.setText(senderName);
+        messagingViewHolder.nameTextView.setTextColor(ContextCompat.getColor(mContext, senderNameTextColorResourceId));
+//        messagingViewHolder.avatarImageView.setImageResource();
         messagingViewHolder.messageTextView.setText(chat.getMessage());
         messagingViewHolder.timestampTextView.setText(chat.getTimestamp());
+
+        int imageSizeInPx = (int) mContext.getResources().getDimension(R.dimen.chat_picture_size);
+
+        Picasso.with(mContext)
+                .load(senderImageUrl)
+                .resize(imageSizeInPx, imageSizeInPx)
+                .centerInside()
+                .transform(new RoundedTransformation(imageSizeInPx / 2, 0))
+                .into(messagingViewHolder.avatarImageView);
+
     }
 }

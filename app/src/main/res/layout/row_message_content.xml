@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/linear_layout_message_content_holder"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:background="@drawable/message_bg_left"
+    android:orientation="vertical"
 
     android:paddingEnd="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingStart="@dimen/activity_horizontal_margin"
-    >
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin">
 
     <TextView
         android:id="@+id/text_view_message_content_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_medium"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
         tools:text="Ash"
         tools:textColor="@color/colorLeftName" />
 
@@ -25,14 +27,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/text_size_medium"
-        tools:text="WHATT?" />
+        android:paddingBottom="@dimen/activity_horizontal_margin"
+        tools:text="WHAT?" />
 
     <TextView
         android:id="@+id/text_view_message_content_timestamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorTimestamp"
         android:textSize="@dimen/text_size_small"
-        tools:text="Jul, 9 10:28"
-        tools:textColor="@color/colorTimestamp" />
+        android:layout_marginBottom="@dimen/activity_horizontal_margin"
+        tools:text="Jul, 9 10:28" />
 
 </LinearLayout>
