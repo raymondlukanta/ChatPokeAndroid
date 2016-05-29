@@ -1,5 +1,7 @@
 package raymond.lukanta.com.chatpokeandroid.model;
 
+import java.util.Date;
+
 /**
  * Created by raymondlukanta on 28/05/16.
  */
@@ -7,13 +9,9 @@ public class Chat {
     public static final String SELLER_CHAT_TYPE = "s";
     public static final String BUYER_CHAT_TYPE = "b";
 
-    private String timestamp;
+    private Date timestamp;
     private String message;
     private String type;
-
-    public static String getBuyerChatType() {
-        return BUYER_CHAT_TYPE;
-    }
 
     public String getMessage() {
         return message;
@@ -23,15 +21,11 @@ public class Chat {
         this.message = message;
     }
 
-    public static String getSellerChatType() {
-        return SELLER_CHAT_TYPE;
-    }
-
-    public String getTimestamp() {
+    public Date getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(String timestamp) {
+    public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp;
     }
 

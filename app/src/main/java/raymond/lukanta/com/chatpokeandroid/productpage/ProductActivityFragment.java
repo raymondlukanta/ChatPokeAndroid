@@ -26,6 +26,7 @@ public class ProductActivityFragment extends BaseFragment {
     private ChatPokeAndroidApplication mApp;
     private TextView mProductPrice;
     private TextView mProductDescription;
+    private Product mProduct;
 
     public ProductActivityFragment() {
     }
@@ -59,11 +60,11 @@ public class ProductActivityFragment extends BaseFragment {
                 hideProgressDialog();
                 if (response.isSuccessful()) {
                     ProductResponse productResponse = response.body();
-                    Product product = productResponse.getProduct();
-                    mProductPrice.setText(product.getPrice());
-                    mProductDescription.setText(product.getDescription());
+                    mProduct = productResponse.getProduct();
+                    mProductPrice.setText(mProduct.getPrice());
+                    mProductDescription.setText(mProduct.getDescription());
 
-                    mListener.onProductResultSuccess(product.getImageUrl(), product.getName());
+                    mListener.onProductResultSuccess(mProduct.getImageUrl(), mProduct.getName());
 
                 } else {
                     showAlertDialog(getString(R.string.alert_dialog_oops), getString(R.string.error_common));
@@ -78,6 +79,7 @@ public class ProductActivityFragment extends BaseFragment {
             }
         });
     }
+
 
     @Override
     public void onAttach(Context context) {

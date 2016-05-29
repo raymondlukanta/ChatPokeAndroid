@@ -10,6 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
+
 import raymond.lukanta.com.chatpokeandroid.R;
 import raymond.lukanta.com.chatpokeandroid.app.ChatPokeAndroidApplication;
 import raymond.lukanta.com.chatpokeandroid.model.Chat;
@@ -19,13 +24,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class FirstPageActivityFragment extends BaseFragment {
     private ChatPokeAndroidApplication mApp;
     private ChatAdapter mChatAdapter;
     private RecyclerView mChatHistoryRecyclerView;
+    private SimpleDateFormat mChatTimestampSimpleDateFormat;
 
     public FirstPageActivityFragment() {
     }
@@ -34,6 +37,8 @@ public class FirstPageActivityFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApp = (ChatPokeAndroidApplication) getActivity().getApplication();
+
+        mChatTimestampSimpleDateFormat = new SimpleDateFormat("MMM d, h:mm", Locale.getDefault());
     }
 
     @Override
@@ -50,7 +55,10 @@ public class FirstPageActivityFragment extends BaseFragment {
                 Chat chat = new Chat();
                 chat.setMessage(chatEditorEditText.getText().toString().trim());
                 chat.setType("b");
-                chat.setTimestamp("DDDD");
+
+                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+
+                chat.setTimestamp(calendar.getTime());
                 mChatAdapter.addEntity(chat);
                 chatEditorEditText.setText("");
                 scrollChatHistoryRecyclerViewToBottom();

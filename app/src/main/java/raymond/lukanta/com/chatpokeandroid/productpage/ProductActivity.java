@@ -5,10 +5,8 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,10 +16,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import raymond.lukanta.com.chatpokeandroid.R;
-import raymond.lukanta.com.chatpokeandroid.ui.RoundedTransformation;
 
 public class ProductActivity extends AppCompatActivity implements ProductActivityFragment.OnFragmentInteractionListener {
-
     private Toolbar mToolbar;
     private TextView mProductName;
 
@@ -29,6 +25,7 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mToolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         setSupportActionBar(mToolbar);
@@ -43,8 +40,6 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         }
 
         mProductName = (TextView) findViewById(R.id.text_view_product_page_toolbar_product_name);
-
-
     }
 
     public int getStatusBarHeight() {
@@ -89,10 +84,7 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
     public void onProductResultSuccess(String imageUrl, String productName) {
         mProductName.setText(productName);
 
-        Picasso picasso = Picasso.with(this);
-        picasso.setIndicatorsEnabled(true);
-        picasso.setLoggingEnabled(true);
-        picasso
+        Picasso.with(this)
                 .load(imageUrl)
                 .into(mPicassoTarget);
     }

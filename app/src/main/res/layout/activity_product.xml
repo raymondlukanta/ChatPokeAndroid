@@ -16,19 +16,15 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
             android:gravity="bottom"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
             tools:background="@drawable/pokeball">
 
             <TextView
                 android:id="@+id/text_view_product_page_toolbar_product_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:background="?android:attr/selectableItemBackground"
-                android:paddingBottom="@dimen/activity_horizontal_margin"
-                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:paddingBottom="@dimen/activity_vertical_margin"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/text_size_product_page_toolbar_title"
                 tools:text="Pokeball" />

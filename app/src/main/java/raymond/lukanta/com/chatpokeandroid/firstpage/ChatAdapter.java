@@ -12,12 +12,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import raymond.lukanta.com.chatpokeandroid.R;
 import raymond.lukanta.com.chatpokeandroid.model.Chat;
 import raymond.lukanta.com.chatpokeandroid.model.Offer;
 import raymond.lukanta.com.chatpokeandroid.ui.AbstractListAdapter;
 import raymond.lukanta.com.chatpokeandroid.ui.RoundedTransformation;
-import raymond.lukanta.com.chatpokeandroid.ui.ViewHelper;
 
 /**
  * Created by raymondlukanta on 28/05/16.
@@ -32,10 +34,14 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
     private final String mBuyerName;
     private final String mSellerImageUrl;
     private final String mBuyerImageUrl;
+    private final SimpleDateFormat mChatTimestampSimpleDateFormat;
 
     public ChatAdapter(Context context, Offer offer) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
+
+        mChatTimestampSimpleDateFormat = new SimpleDateFormat("MMM d, h:mm", Locale.getDefault());
+
 
         mSellerName = offer.getSellerName();
         mSellerImageUrl = offer.getSellerImageUrl();
@@ -122,9 +128,8 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
         messagingViewHolder.messageContentHolderLinearLayout.setBackgroundResource(chatBackgroundResourceId);
         messagingViewHolder.nameTextView.setText(senderName);
         messagingViewHolder.nameTextView.setTextColor(ContextCompat.getColor(mContext, senderNameTextColorResourceId));
-//        messagingViewHolder.avatarImageView.setImageResource();
         messagingViewHolder.messageTextView.setText(chat.getMessage());
-        messagingViewHolder.timestampTextView.setText(chat.getTimestamp());
+        messagingViewHolder.timestampTextView.setText(mChatTimestampSimpleDateFormat.format(chat.getTimestamp()));
 
         int imageSizeInPx = (int) mContext.getResources().getDimension(R.dimen.chat_picture_size);
 
