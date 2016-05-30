@@ -13,7 +13,6 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".firstpage.FirstPageActivity"
-            android:label="@string/title_activity_first_page"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|screenSize|keyboardHidden">
             <intent-filter>

@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">ChatPokeAndroid</string>
-    <string name="title_activity_first_page">FirstPageActivity</string>
+    <string name="app_name">Chat Poke</string>
     <string name="action_settings">Settings</string>
     <string name="first_page_toolbar_image">first page toolbar image</string>
     <string name="message_left_avatar">message left avatar</string>
