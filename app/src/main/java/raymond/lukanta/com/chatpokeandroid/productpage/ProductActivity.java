@@ -16,7 +16,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewConfiguration;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
@@ -51,15 +50,11 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         getSupportActionBar().setHomeButtonEnabled(true);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
             mToolbar.setPadding(0, getStatusBarHeight(), 0, 0);
 
-            boolean hasMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
-            boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
-            int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
-
-            if ((!hasMenuKey && !hasBackKey) || id > 0) {
+            if (isDeviceShowNavigationBar()) {
                 View fragment = findViewById(R.id.fragment);
 
                 int screenOrientation = getResources().getConfiguration().orientation;
@@ -77,7 +72,14 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         mProductName = (TextView) findViewById(R.id.text_view_product_page_toolbar_product_name);
     }
 
-    public int getStatusBarHeight() {
+    private boolean isDeviceShowNavigationBar() {
+        boolean hasMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
+        boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+        int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
+
+        return (!hasMenuKey && !hasBackKey) || id > 0;
+    }
+    private int getStatusBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
         if (resourceId > 0) {
@@ -86,7 +88,7 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         return result;
     }
 
-    public int getNavigationBarHeight() {
+    private int getNavigationBarHeight() {
         int result = 0;
         int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
         if (resourceId > 0) {
