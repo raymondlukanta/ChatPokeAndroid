@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/linear_layout_message_content_holder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/message_bg_left"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/chat_picture_size"
+        android:layout_marginStart="@dimen/chat_picture_size"
+        android:layout_toLeftOf="@+id/image_view_message_avatar"
+        android:layout_toStartOf="@+id/image_view_message_avatar"
+        android:paddingEnd="@dimen/message_bubble_wider_margin"
+        android:paddingLeft="@dimen/message_bubble_margin"
+        android:paddingRight="@dimen/message_bubble_wider_margin"
+        android:paddingStart="@dimen/message_bubble_margin">
+
+        <TextView
+            android:id="@+id/text_view_message_content_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_medium"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/message_bubble_top_margin"
+            tools:text="Ash"
+            tools:textColor="@color/colorLeftName" />
+
+        <TextView
+            android:id="@+id/text_view_message_content_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_medium"
+            android:paddingBottom="@dimen/message_bubble_margin"
+            tools:text="WHAT?" />
+
+        <TextView
+            android:id="@+id/text_view_message_content_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorTimestamp"
+            android:textSize="@dimen/text_size_small"
+            android:layout_marginBottom="@dimen/message_bubble_margin"
+            tools:text="Jul, 9 10:28" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/image_view_message_avatar"
+        android:layout_width="@dimen/chat_picture_size"
+        android:layout_height="@dimen/chat_picture_size"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:contentDescription="@string/message_right_avatar"
+        android:src="@drawable/pokeball"/>
+
+</RelativeLayout>
