@@ -44,7 +44,6 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         }
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        mToolbar.setPadding(0, getStatusBarHeight(), 0, 0);
         setSupportActionBar(mToolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -54,26 +53,28 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
             window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+            mToolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+
+            boolean hasMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
+            boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
+            int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
+
+            if ((!hasMenuKey && !hasBackKey) || id > 0) {
+                View fragment = findViewById(R.id.fragment);
+
+                int screenOrientation = getResources().getConfiguration().orientation;
+                switch (screenOrientation) {
+                    case Configuration.ORIENTATION_PORTRAIT:
+                        fragment.setPadding(16, 16, 16, getNavigationBarHeight());
+                        break;
+                    case Configuration.ORIENTATION_LANDSCAPE:
+                        fragment.setPadding(16, 16, getNavigationBarHeight(), 16);
+                        break;
+                }
+            }
         }
 
         mProductName = (TextView) findViewById(R.id.text_view_product_page_toolbar_product_name);
-
-        boolean hasMenuKey = ViewConfiguration.get(this).hasPermanentMenuKey();
-        boolean hasBackKey = KeyCharacterMap.deviceHasKey(KeyEvent.KEYCODE_BACK);
-
-        if (!hasMenuKey && !hasBackKey) {
-            View fragment = findViewById(R.id.fragment);
-
-            int screenOrientation = getResources().getConfiguration().orientation;
-            switch (screenOrientation) {
-                case Configuration.ORIENTATION_PORTRAIT:
-                    fragment.setPadding(16, 16, 16, getNavigationBarHeight());
-                    break;
-                case Configuration.ORIENTATION_LANDSCAPE:
-                    fragment.setPadding(16, 16, getNavigationBarHeight(), 16);
-                    break;
-            }
-        }
     }
 
     public int getStatusBarHeight() {
@@ -145,6 +146,8 @@ public class ProductActivity extends AppCompatActivity implements ProductActivit
 
         Picasso.with(this)
                 .load(imageUrl)
+                .error(android.R.drawable.stat_notify_error)
+                .placeholder(R.drawable.progress_image)
                 .into(mPicassoTarget);
     }
 }

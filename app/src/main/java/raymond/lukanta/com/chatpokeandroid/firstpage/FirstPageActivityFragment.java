@@ -49,16 +49,19 @@ public class FirstPageActivityFragment extends BaseFragment {
         sendChatFloatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Chat chat = new Chat();
-                chat.setMessage(chatEditorEditText.getText().toString().trim());
-                chat.setType("b");
+                String chatMessage = chatEditorEditText.getText().toString().trim();
+                if (!chatMessage.isEmpty()) {
+                    Chat chat = new Chat();
+                    chat.setMessage(chatEditorEditText.getText().toString().trim());
+                    chat.setType(Chat.BUYER_CHAT_TYPE);
 
-                Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+                    Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
-                chat.setTimestamp(calendar.getTime());
-                mChatAdapter.addEntity(chat);
-                chatEditorEditText.setText("");
-                scrollChatHistoryRecyclerViewToBottom();
+                    chat.setTimestamp(calendar.getTime());
+                    mChatAdapter.addEntity(chat);
+                    chatEditorEditText.setText("");
+                    scrollChatHistoryRecyclerViewToBottom();
+                }
             }
         });
 
