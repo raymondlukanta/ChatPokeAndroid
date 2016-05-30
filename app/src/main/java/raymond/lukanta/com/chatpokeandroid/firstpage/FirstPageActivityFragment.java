@@ -65,6 +65,8 @@ public class FirstPageActivityFragment extends BaseFragment {
         mChatHistoryRecyclerView = (RecyclerView) layout.findViewById(R.id.recycler_view_first_page_chat_history);
         mChatHistoryRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mChatHistoryRecyclerView.setHasFixedSize(true);
+        mChatAdapter = new ChatAdapter(getActivity());
+        mChatHistoryRecyclerView.setAdapter(mChatAdapter);
 
         callChatApi();
         return layout;
@@ -85,9 +87,7 @@ public class FirstPageActivityFragment extends BaseFragment {
                 if (response.isSuccessful()) {
                     Messaging messaging = response.body();
 
-                    mChatAdapter = new ChatAdapter(getActivity(), messaging.getOffer());
-                    mChatHistoryRecyclerView.setAdapter(mChatAdapter);
-
+                    mChatAdapter.setOffer(messaging.getOffer());
                     mChatAdapter.setData(messaging.getChats());
                     scrollChatHistoryRecyclerViewToBottom();
 

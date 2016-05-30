@@ -30,19 +30,22 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
 
     private final Context mContext;
     private final LayoutInflater mInflater;
-    private final String mSellerName;
-    private final String mBuyerName;
-    private final String mSellerImageUrl;
-    private final String mBuyerImageUrl;
+
     private final SimpleDateFormat mChatTimestampSimpleDateFormat;
 
-    public ChatAdapter(Context context, Offer offer) {
+    private String mSellerName;
+    private String mBuyerName;
+    private String mSellerImageUrl;
+    private String mBuyerImageUrl;
+
+    public ChatAdapter(Context context) {
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
 
         mChatTimestampSimpleDateFormat = new SimpleDateFormat("MMM d, h:mm", Locale.getDefault());
+    }
 
-
+    public void setOffer(Offer offer) {
         mSellerName = offer.getSellerName();
         mSellerImageUrl = offer.getSellerImageUrl();
 

@@ -1,8 +1,8 @@
 package raymond.lukanta.com.chatpokeandroid.productpage;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +35,9 @@ public class ProductActivityFragment extends BaseFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setRetainInstance(true);
         mApp = (ChatPokeAndroidApplication) getActivity().getApplication();
+        callProductApi();
     }
 
     @Override
@@ -45,8 +47,7 @@ public class ProductActivityFragment extends BaseFragment {
 
         mProductPrice = (TextView) layout.findViewById(R.id.text_view_product_page_product_price);
         mProductDescription = (TextView) layout.findViewById(R.id.text_view_product_page_product_description);
-
-        callProductApi();
+        updateUI();
         return layout;
     }
 
@@ -61,10 +62,7 @@ public class ProductActivityFragment extends BaseFragment {
                 if (response.isSuccessful()) {
                     ProductResponse productResponse = response.body();
                     mProduct = productResponse.getProduct();
-                    mProductPrice.setText(mProduct.getPrice());
-                    mProductDescription.setText(mProduct.getDescription());
-
-                    mListener.onProductResultSuccess(mProduct.getImageUrl(), mProduct.getName());
+                    updateUI();
 
                 } else {
                     showAlertDialog(getString(R.string.alert_dialog_oops), getString(R.string.error_common));
@@ -78,6 +76,15 @@ public class ProductActivityFragment extends BaseFragment {
                 t.printStackTrace();
             }
         });
+    }
+
+    private void updateUI() {
+        if (mProductPrice != null && mProduct != null) {
+            mProductPrice.setText(mProduct.getPrice());
+            mProductDescription.setText(mProduct.getDescription());
+
+            mListener.onProductResultSuccess(mProduct.getImageUrl(), mProduct.getName());
+        }
     }
 
 
