@@ -3,7 +3,9 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="message_bubble_wider_margin">32dp</dimen>
+    <dimen name="message_bubble_wider_margin">24dp</dimen>
+    <dimen name="message_bubble_margin">12dp</dimen>
+    <dimen name="message_bubble_top_margin">10dp</dimen>
 
     <dimen name="text_size_small">12sp</dimen>
     <dimen name="text_size_medium">16sp</dimen>
@@ -15,6 +17,7 @@
     <dimen name="toolbar_picture_size">35dp</dimen>
     <dimen name="toolbar_product_activity_size">350dp</dimen>
     <dimen name="chat_picture_size">40dp</dimen>
+    <dimen name="submit_chat_button_size">50dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
 </resources>

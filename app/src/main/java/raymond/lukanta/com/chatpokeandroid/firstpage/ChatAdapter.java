@@ -42,7 +42,7 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
         mContext = context;
         mInflater = LayoutInflater.from(mContext);
 
-        mChatTimestampSimpleDateFormat = new SimpleDateFormat("MMM d, h:mm", Locale.getDefault());
+        mChatTimestampSimpleDateFormat = new SimpleDateFormat("MMM d, k:mm", Locale.getDefault());
     }
 
     public void setOffer(Offer offer) {
@@ -101,7 +101,6 @@ public class ChatAdapter extends AbstractListAdapter<Chat, ChatAdapter.ViewHolde
             nameTextView = (TextView) v.findViewById(R.id.text_view_message_content_name);
             messageTextView = (TextView) v.findViewById(R.id.text_view_message_content_message);
             timestampTextView = (TextView) v.findViewById(R.id.text_view_message_content_timestamp);
-
         }
     }
 

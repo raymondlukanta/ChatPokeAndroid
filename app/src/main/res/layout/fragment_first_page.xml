@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="raymond.lukanta.com.chatpokeandroid.firstpage.FirstPageActivityFragment"
     tools:showIn="@layout/activity_first_page">
 
@@ -18,26 +19,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_toLeftOf="@+id/floating_action_button_first_page_send_button"
-        android:layout_toStartOf="@+id/floating_action_button_first_page_send_button"
+        android:layout_marginBottom="@dimen/message_bubble_margin"
+        android:layout_marginLeft="@dimen/message_bubble_margin"
+        android:layout_marginTop="@dimen/activity_horizontal_margin"
+        android:layout_toLeftOf="@+id/image_button_first_page_send_button"
+        android:layout_toStartOf="@+id/image_button_first_page_send_button"
         android:background="@drawable/message_bg_input"
         android:hint="@string/send_a_message"
         android:maxHeight="@dimen/max_edit_text_height"
-        android:padding="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/message_bubble_margin"
         android:scrollbars="vertical" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floating_action_button_first_page_send_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:id="@+id/image_button_first_page_send_button"
+        android:layout_width="@dimen/submit_chat_button_size"
+        android:layout_height="@dimen/submit_chat_button_size"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:src="@drawable/ic_send" />
+        android:layout_marginTop="@dimen/message_bubble_margin"
+        android:layout_marginRight="@dimen/message_bubble_margin"
+        android:background="@drawable/circle_drawable"
+        android:src="@drawable/ic_send"
+        android:scaleType="centerInside"/>
 
 </RelativeLayout>

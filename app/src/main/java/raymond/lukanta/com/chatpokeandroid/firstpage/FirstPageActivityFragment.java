@@ -8,17 +8,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
-import java.text.SimpleDateFormat;
+import com.squareup.picasso.Picasso;
+
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.TimeZone;
 
 import raymond.lukanta.com.chatpokeandroid.R;
 import raymond.lukanta.com.chatpokeandroid.app.ChatPokeAndroidApplication;
 import raymond.lukanta.com.chatpokeandroid.model.Chat;
 import raymond.lukanta.com.chatpokeandroid.model.Messaging;
+import raymond.lukanta.com.chatpokeandroid.ui.RoundedTransformation;
 import raymond.lukanta.com.chatpokeandroid.util.BaseFragment;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,8 +48,9 @@ public class FirstPageActivityFragment extends BaseFragment {
 
         final EditText chatEditorEditText = (EditText) layout.findViewById(R.id.edit_text_first_page_chat_editor);
 
-        FloatingActionButton sendChatFloatingActionButton = (FloatingActionButton) layout.findViewById(R.id.floating_action_button_first_page_send_button);
-        sendChatFloatingActionButton.setOnClickListener(new View.OnClickListener() {
+        ImageButton sendChatImageButton = (ImageButton) layout.findViewById(R.id.image_button_first_page_send_button);
+
+        sendChatImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String chatMessage = chatEditorEditText.getText().toString().trim();

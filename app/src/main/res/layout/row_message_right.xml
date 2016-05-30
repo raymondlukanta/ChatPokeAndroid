@@ -16,9 +16,9 @@
         android:layout_toLeftOf="@+id/image_view_message_avatar"
         android:layout_toStartOf="@+id/image_view_message_avatar"
         android:paddingEnd="@dimen/message_bubble_wider_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/message_bubble_margin"
         android:paddingRight="@dimen/message_bubble_wider_margin"
-        android:paddingStart="@dimen/activity_horizontal_margin">
+        android:paddingStart="@dimen/message_bubble_margin">
 
         <TextView
             android:id="@+id/text_view_message_content_name"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_medium"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/activity_horizontal_margin"
+            android:layout_marginTop="@dimen/message_bubble_top_margin"
             tools:text="Ash"
             tools:textColor="@color/colorLeftName" />
 
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size_medium"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/message_bubble_margin"
             tools:text="WHAT?" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/colorTimestamp"
             android:textSize="@dimen/text_size_small"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/message_bubble_margin"
             tools:text="Jul, 9 10:28" />
 
     </LinearLayout>
